@@ -1,5 +1,7 @@
 
-//Prepend a node at the beginning(Insert a node at the beginning of list) 
+//Append a node to the end of the linked list(Insert at the end)
+
+
 
 class Node{
     constructor(data){
@@ -7,41 +9,43 @@ class Node{
         this.next = null
     }
 }
+
 class LinkedList{
     constructor(data){
         const newNode = new Node(data)
         this.head = newNode
         this.tail = newNode
-        this.length = 1 
+        this.length = 1
+
     }
 
-    prepend(data){
-       if(!this.head){
+
+append(data){
+    if(!this.head){
         this.head = newNode
         this.tail = newNode
-       }else{
+    }else{
         const newNode = new Node(data)
-        this.tail.next = newNode
-        this.tail = newNode
-       }
-       this.length++
-       return this
+        newNode.next = this.head
+        this.head = newNode
     }
-
-    print(){
-        let current = this.head
-        let list = ''
-        while(current){
-            list += current.data + ' '
-            current = current.next
-        }
-        console.log(list)
-    }
+    this.length++
+    return this
 }
-let myLinkedList = new LinkedList(30)
-myLinkedList.prepend(20)
-myLinkedList.prepend(10)
+print(){
+    let current = this.head
+    let list = ''
+    while(current){
+        list += current.data + ' '
+        current = current.next
+        
+    }
+    console.log(list)
+}
 
-
-myLinkedList.print() // Output: 5 10 20
-
+}
+let myLinkedList = new LinkedList(20)
+myLinkedList.append(30)
+myLinkedList.append(40)
+myLinkedList.append(50)
+myLinkedList.print()
