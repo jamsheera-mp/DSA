@@ -1,5 +1,5 @@
 
-//Prepend a node at the beginning(Insert a node at the beginning of list) 
+//Append a node at the end(Insert a node at the end of list) 
 
 class Node{
     constructor(data){
@@ -15,7 +15,7 @@ class LinkedList{
         this.length = 1 
     }
 
-    prepend(data){
+    append(data){
        if(!this.head){
         this.head = newNode
         this.tail = newNode
@@ -39,8 +39,8 @@ class LinkedList{
     }
 }
 let myLinkedList = new LinkedList(30)
-myLinkedList.prepend(20)
-myLinkedList.prepend(10)
+myLinkedList.append(20)
+myLinkedList.append(10)
 
 
 myLinkedList.print() // Output: 5 10 20

@@ -1,5 +1,5 @@
 
-//Append a node to the end of the linked list(Insert at the end)
+//Prepend a node to the beginning of the linked list(Insert at the end)
 
 
 
@@ -20,7 +20,7 @@ class LinkedList{
     }
 
 
-append(data){
+prepend(data){
     if(!this.head){
         this.head = newNode
         this.tail = newNode
@@ -45,7 +45,7 @@ print(){
 
 }
 let myLinkedList = new LinkedList(20)
-myLinkedList.append(30)
-myLinkedList.append(40)
-myLinkedList.append(50)
+myLinkedList.prepend(30)
+myLinkedList.prepend(40)
+myLinkedList.prepend(50)
 myLinkedList.print()
