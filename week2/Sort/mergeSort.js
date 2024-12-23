@@ -8,7 +8,7 @@ function mergeSort(arr){
     let left = arr.slice(0,mid)
     let right= arr.slice(mid)
     return merge(mergeSort(left),mergeSort(right))
-    
+
 }
 function merge(left,right){
     const sorted = []
@@ -23,3 +23,4 @@ function merge(left,right){
 }
 
 const arr = [8,20,-2,4,-6]
+console.log(mergeSort(arr));
