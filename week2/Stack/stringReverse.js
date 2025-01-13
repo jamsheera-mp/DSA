@@ -1,26 +1,25 @@
 
 
-class Stack{
-    size
-    top
-    a = []
-
-    isEmpty(){
-        return (this.top < 0)
+function reverseStringUsingStack(str) {
+    // Step 1: Create an empty stack
+    let stack = [];
+    
+    // Step 2: Push all characters of the string onto the stack
+    for (let char of str) {
+        stack.push(char);
     }
-    constructor(n){
-        this.top = -1
-        this.size = n
-        this.a = new Array(this.size)
+    
+    // Step 3: Pop characters from the stack and build the reversed string
+    let reversedString = "";
+    while (stack.length > 0) {
+        reversedString += stack.pop();
     }
-    push(x){
-        if(this.top >= this.size){
-            console.log("Stack is full")
-            return false
-        }else{
-            this.a[++this.top] = x
-            return true
-        }
-
-    }
+    
+    return reversedString;
 }
+
+// Example usage:
+const originalString = "hello world";
+const reversedString = reverseStringUsingStack(originalString);
+console.log("Original String:", originalString); // Output: hello
+console.log("Reversed String:", reversedString); // Output: olleh

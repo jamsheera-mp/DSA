@@ -1,3 +1,4 @@
+
 let stack = [];
 
 function reverseStack(stack) {

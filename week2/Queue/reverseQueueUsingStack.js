@@ -21,7 +21,7 @@ function reverseQueue(){
     }
 }
 
-queue = []
+
     queue.push(10);
     queue.push(20);
     queue.push(30);

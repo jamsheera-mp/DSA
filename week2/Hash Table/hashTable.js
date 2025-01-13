@@ -1,79 +1,64 @@
-class HashTable {
-    constructor(size) {
-        this.table = new Array(size);
-        this.size = 0;
-    }
 
-    _hash(key) {
-        let hash = 0;
-        for (let i = 0; i < key.length; i++) {
-            hash += key.charCodeAt(i);
-        }
-        return hash % this.table.length;
+class HashTable{
+    constructor(size){
+        this.table = new Array(size)
+        this.size = size
     }
-
-    set(key, value) {
-        let index = this._hash(key);
-        if (!this.table[index]) {
-            this.table[index] = []; // Initialize a bucket for chaining
+    hash(key){
+        let total = 0
+        for(let char of key){
+            total += char.charCodeAt(0)
         }
-        // Check if key already exists and update
-        for (let pair of this.table[index]) {
-            if (pair[0] === key) {
-                pair[1] = value;
-                return;
+        return total % this.size
+    }
+    set(key,value){
+        const index = this.hash(key)
+        if(!this.table[index]){
+            this.table[index] = []
+        }
+        for(let pair of this.table[index]){
+            if(pair[0]=== key){
+                pair[1] = value
+                return
             }
         }
-        this.table[index].push([key, value]);
-        this.size++;
+        this.table[index].push([key,value])
     }
-
-    get(key) {
-        const index = this._hash(key);
-        if (this.table[index]) {
-            for (let pair of this.table[index]) {
-                if (pair[0] === key) {
-                    return pair[1];
-                }
+    get(key){
+        const index = this.hash(key)
+        if(!this.table[index]) return undefined
+        for(let pair of this.table[index]){
+            if(pair[0] === key){
+                return pair[1]
             }
         }
-        return undefined; // Return undefined if key is not found
+        return undefined
     }
-
-    remove(key) {
-        const index = this._hash(key);
-        if (this.table[index]) {
-            for (let i = 0; i < this.table[index].length; i++) {
-                if (this.table[index][i][0] === key) {
-                    this.table[index].splice(i, 1); // Remove key-value pair
-                    this.size--;
-                    return true;
-                }
+    delete(key){
+        const index = this.hash(key)
+        if(!this.table[index]) return false
+        for(let i= 0;i<this.table[index].length;i++){
+            if(this.table[index][i][0] === key){
+                this.table[index].splice(i,1)
+                return true
             }
         }
-        return false; // Return false if key is not found
+        return false
     }
-
-    display() {
-        for (let i = 0; i < this.table.length; i++) {
-            if (this.table[i] && this.table[i].length > 0) {
-                console.log(i, this.table[i]);
+    print(){
+        this.table.forEach((bucket,index)=>{
+            if(bucket){
+                console.log(`Bucket ${index} :`, bucket)
             }
-        }
+        })
     }
 }
 
-// Test the corrected implementation
-const table = new HashTable(50);
-table.set("Canada", 300);
-table.set("Spain", 400);
-table.set("France", 500);
-table.display();
-
-console.log(table.get("Canada")); // 300
-console.log(table.get("Spain"));  // 400
-
-console.log(table.remove("Spain")); // true
-console.log(table.get("Spain"));   // undefined
-
-table.display();
+        // Example Usage
+        const hashTable = new HashTable(10);
+        hashTable.set("name", "Jamsheera");
+        hashTable.set("age", 30);
+        hashTable.set("job", "Developer");
+        console.log(hashTable.get("name")); // Output: "Jamsheera"
+        hashTable.delete("age");
+        hashTable.print();

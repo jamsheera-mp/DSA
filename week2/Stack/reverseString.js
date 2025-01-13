@@ -21,4 +21,4 @@ const reverseWords = function(s){
 
 }
 
-console.log(reverseWords('Hello world'));
+console.log(reverseWords('Hello world')); //world hello

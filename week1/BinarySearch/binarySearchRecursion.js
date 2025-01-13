@@ -3,7 +3,7 @@ function binarysearchRecursive(array,target,start,end){
     if(start > end){
         return -1
     }
-    let mid = Math.floor((start +end)/2)
+    let mid = Math.floor((start + end)/2)
 
     if(array[mid] === target){
         return mid

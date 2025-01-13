@@ -8,7 +8,8 @@ class Queue{
     }   
     dequeue(){
         if(this.items.length === 0){
-            return "Underflow,can not perform dequeue "
+            console.log( "queue is empty,can not perform dequeue ")
+            return null
         }
         return this.items.shift()
     }

@@ -8,14 +8,14 @@ function print(queue){
     }
 }
 
-function reverseQueue(q){
-    if(q.length == 0){
+function reverseQueue(queue){
+    if(queue.length == 0){
         return
     }
-    let fr = q[0]
-    q.shift()
+    let front = queue[0]
+    queue.shift()
     reverseQueue(q)
-    q.push(fr)
+    queue.push(front)
 }
 
 let queue = []

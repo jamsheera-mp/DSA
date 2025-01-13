@@ -8,7 +8,7 @@ class HashTable{
     _hash(key){
         let hash = 0
         for(let i=0;i<key.length;i++){
-            hash += charCodeAt(i)
+            hash += key.charCodeAt(i)
           
         }
         return hash % this.table.length
@@ -24,7 +24,8 @@ class HashTable{
                 return 
             }
         }
-        this.table.push([key,value])
+        this.table[index].push([key,value])
+        this.size++
     }
     get(key){
         let index = this._hash(key)
@@ -39,21 +40,35 @@ class HashTable{
     }
     remove(key){
         let index = this._hash(key)
-        for(let i=0;i<this.table[index].length;i++){
-            if(this.table[index][i][0] === key){
-                this.table[index].splice(i,1)
-                this.size--
-                return true
+        if(this.table[index]){
+            for(let i=0;i<this.table[index].length;i++){
+                if(this.table[index][i][0] === key){
+                    this.table[index].splice(i,1)
+                    this.size--
+                    return true
+                }
             }
         }
+        
         return false
     }
     display(){
         for(let i=0;i<this.table.length;i++){
             if(this.table[i] && this.table[i].length){
-                console.log(i,this.table[i]);
+                console.log(`Index ${i}:`,this.table[i]);
                 
             }
         }
     }
 }
+
+const hashTable = new HashTable(10);
+hashTable.set("name", "Jamsheera");
+hashTable.set("age", 30);
+hashTable.set("job", "Developer");
+hashTable.set("hobby", "Gardening");
+hashTable.set("color", "Blue");
+
+console.log(hashTable.get("job")); // Output: Developer
+hashTable.remove("age");
+hashTable.display();

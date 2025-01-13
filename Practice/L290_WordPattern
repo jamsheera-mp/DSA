@@ -1,0 +1,33 @@
+
+//Input: pattern = "abba", s = "dog cat cat dog"    Output: true
+//Input: pattern = "abba", s = "dog cat cat fish"    Output: false
+
+var wordPattern = function(pattern, s) {
+    const charToWord = new Map() // Map to map characters from the pattern to words in the string
+    const wordToChar = new Map()  // Map to map words in the string back to characters in the pattern
+
+    const words = s.split(' ')  // Split the string 's' into words
+    let i=0    // Index to track the current position in the pattern
+
+    for(const word of words){
+    // Iterate through each word in the string 's'
+        if(i === pattern.length){// If the number of words exceeds the length of the pattern, return false
+            return false
+        }
+          // Get the current character from the pattern
+        const currentChar = pattern[i];
+         // If the current character and word are seen for the first time, add them to the maps
+        if (!charToWord.has(currentChar) && !wordToChar.has(word)) {
+            charToWord.set(currentChar, word);
+            wordToChar.set(word, currentChar);
+        } else {
+            // If the current character or word is already in the maps, check for consistency
+            if (charToWord.get(currentChar) !== word || wordToChar.get(word) !== currentChar) {
+                return false; // Inconsistent mapping
+            }
+        }
+        ++i; // Move to the next character in the pattern
+    }
+      // Ensure that the entire pattern has been matched with the string
+    return i === pattern.length;
+};
