@@ -5,7 +5,7 @@ var nextGreater = function(nums1,nums2){
     const map = new Map()
     for(let i=nums2.length-1;i>=0;i--){
        
-        while(stack.length >0 && stack[stack.length-1] <= nums2[i]){
+        while(stack.length > 0 && stack[stack.length-1] <= nums2[i]){
             stack.pop()
         }
         map.set(nums2[i],stack.length>0?stack[stack.length-1]:-1)

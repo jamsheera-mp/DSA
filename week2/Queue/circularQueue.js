@@ -9,10 +9,13 @@ class CircularQueue {
     }
 
     isFull() {
-        return (this.front === 0 && 
-            this.rear === this.size - 1) || 
-            (this.rear === (this.front - 1 + this.size) % 
-            this.size);
+        return (this.rear + 1) % this.size === this.front;
+       // return (this.front === 0 && 
+            
+           // this.rear === this.size - 1) || 
+            //(this.rear === (this.front - 1 + this.size) % 
+           // this.size);
+            
     }
 
     isEmpty() {
@@ -27,6 +30,7 @@ class CircularQueue {
         if (this.isEmpty()) {
             this.front = 0;
             this.rear = 0;
+            this.queue[this.rear] = item
         } else {
             this.rear = (this.rear + 1) % 
                 this.size;
@@ -37,17 +41,16 @@ class CircularQueue {
     }
 
     dequeue() {
-        let item;
+       
         if (this.isEmpty()) {
             console.log("Queue is empty");
             return;
         }
+        const item = this.queue[this.front]
         if (this.front === this.rear) {
-            item = this.queue[this.front];
             this.front = -1;
             this.rear = -1;
         } else {
-            item = this.queue[this.front];
             this.front = (this.front + 1) % 
                 this.size;
         }
