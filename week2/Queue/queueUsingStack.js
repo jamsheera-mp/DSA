@@ -75,7 +75,7 @@ class Queue{
         return this.stack2[this.stack2.length-1]
     }
     isEmpty(){
-        return this.stack1.lenth === 0 && this.stack2.length === 0
+        return this.stack1.length === 0 && this.stack2.length === 0
     }
     print(){
         const combinedQueue = [...this.stack2].reverse().concat(this.stack1)

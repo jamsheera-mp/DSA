@@ -8,7 +8,6 @@ function findFirstRepeatingElement(num){
     for(let i=0;i<num.length;i++){
         if(map.has(num[i])){
             
-            
             return num[i]
             
         }

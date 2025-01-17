@@ -1,18 +1,18 @@
 
 class Queue{
     constructor(){
-        this.items = {}
+        this.queue = {}
         this.rear = 0
         this.front = 0
     }
 
-    enqueue(element){
-        this.items[this.rear] = element
+    enqueue(item){
+        this.queue[this.rear] = item
         this.rear++
     }
     dequeue(){
-        const item = this.items[this.front]
-        delete this.items[this.front]
+        const item = this.queue[this.front]
+        delete this.queue[this.front]
         this.front++
         return item
     }
@@ -20,7 +20,7 @@ class Queue{
         return this.rear - this.front === 0
     }
     peek(){
-        return this.items[this.front]
+        return this.queue[this.front]
     }
     size(){
         return this.rear - this.front

@@ -17,9 +17,9 @@ function reverseNumber(num) {
 }
 
 // Reverse each number and reverse the final array order
-let reversedNums = [];
+let result = [];
 for (let i = nums.length - 1; i >= 0; i--) {
-    reversedNums.push(reverseNumber(nums[i]));
+    result.push(reverseNumber(nums[i]));
 }
 
 console.log(reversedNums);

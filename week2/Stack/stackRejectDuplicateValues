@@ -1,0 +1,38 @@
+class UniqueStack {
+    constructor() {
+        this.stack = [];
+        this.set = new Set();
+    }
+
+    push(value) {
+        if (!this.set.has(value)) {
+            this.stack.push(value);
+            this.set.add(value);
+        }
+    }
+
+    pop() {
+        const popped = this.stack.pop();
+        this.set.delete(popped);
+        return popped;
+    }
+
+    peek() {
+        return this.stack[this.stack.length - 1];
+    }
+
+    print() {
+        console.log(this.stack);
+    }
+}
+
+// Test the UniqueStack
+const stack = new UniqueStack();
+stack.push(1);
+stack.push(2);
+stack.push(2); // Duplicate, won't be added
+stack.push(3);
+
+stack.print(); // [1, 2, 3]
+stack.pop();
+stack.print(); // [1, 2]
