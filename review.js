@@ -1,17 +1,26 @@
-let arr=[64, 34, 25, 12, 22, 11, 90]
+let  nums = [1,1,2,2,2,3]
 
-function insertionSort(arr){
-    for(let i=1;i<arr.length;i++){
-        let key = arr[i]
-        let j= i-1
-
-        while(arr[j]>0 && arr[j]>key){
-            arr[j+1] = arr[j]
-            j= j-1
-        }
-        arr[j+1] = key
+//Output: [3,1,1,2,2,2]
+    const map = new Map()
+    for(let i=0;i<nums.length;i++){
+        map.set(nums[i],(map.get(nums[i])||0)+1)
     }
-    return arr
-}
 
-console.log(insertionSort(arr));
+   let sortedMap = Array.from(map).sort((a, b) => a[1] - b[1]);
+
+    console.log(map);
+    console.log(sortedMap);
+
+
+    let result = []
+    for(let [num,count] of sortedMap){
+        while(count>0){
+            result.push(num)
+            count--
+        }
+    }
+    console.log(result);
+    
+    
+    
+
