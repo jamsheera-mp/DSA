@@ -57,17 +57,97 @@ class BinarySearchTree{
             this.preorder(root.right)   
         }
     }
+    inorder(root){
+        if(root){
+            this.inorder(root.left)
+            console.log(root.value)
+            this.inorder(root.right) 
+        }
+    }
+    postorder(root){
+        if(root){
+            this.postorder(root.left)
+            this.postorder(root.right)
+            console.log(root.value)
+            
+        }
+    }
+    levelorder(){
+        const queue = []
+        queue.push(this.root)
+        while(queue.length){
+            let curr = queue.shift()
+            console.log(curr.value);
+            if(curr.left){
+                queue.push(curr.left)
+            }
+            if(curr.right){
+                queue.push(curr.right)
+            }
+        }
+    }
+    min(root){
+        if(!root.left){
+            return root.value
+        }else{
+            return this.min(root.left)
+        }
+    }
+    max(root){
+        if(!root.right){
+            return root.value
+        }else{
+            return this.max(root.right)
+        }
+    }
+    delete(value){
+        this.root = this.deleteNode(this.root,value)
+    }
+    deleteNode(root,value){
+        if(root === null){
+            return root
+        }
+        if(value < root.value){
+            root.left = this.deleteNode(root.left,value)
+        }else if(value > root.value){
+            root.right = this.deleteNode(root.right,value)
+        }else{
+            if(!root.left && !root.right){
+                return null
+            }
+            if(!root.left){
+                return root.right
+            }else if(!root.right){
+                return root.left
+            }
+            root.value = this.min(root.right)
+            root.right = this.deleteNode(root.right,root.value)
+        }
+        return root
+    }
 }
 
 const bst = new BinarySearchTree()
-console.log(bst.isEmpty())
+//console.log(bst.isEmpty())
 bst.insert(10)
 bst.insert(5)
 bst.insert(3)
 bst.insert(7)
 bst.insert(15)
-console.log(bst.isEmpty())
-console.log(bst.search(bst.root,10));
+//console.log(bst.isEmpty())
+/* console.log(bst.search(bst.root,10));
 console.log(bst.search(bst.root,5));
 console.log(bst.search(bst.root,3));
-console.log(bst.search(bst.root,20));
+console.log(bst.search(bst.root,20)); */
+//bst.preorder(bst.root)
+//bst.inorder(bst.root)
+//bst.postorder(bst.root)
+//bst.levelorder(bst.root)
+/* console.log(bst.min(bst.root));
+console.log(bst.max(bst.root)); */
+
+bst.delete(3)
+
+bst.delete(5)
+bst.delete(10)
+bst.levelorder(bst.root)
