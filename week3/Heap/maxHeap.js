@@ -72,6 +72,30 @@ class MaxHeap {
             index = largest;
         }
     }
+     // Delete a specific node with value
+     deleteNode(value) {
+        const index = this.heap.indexOf(value); // Find the index of the node
+        if (index === -1) {
+            console.log("Value not found in the heap.");
+            return;
+        }
+
+        const lastIndex = this.heap.length - 1;
+
+        // Swap the node to delete with the last node
+        this.swap(index, lastIndex);
+
+        // Remove the last node (which is the node to delete)
+        this.heap.pop();
+
+        // Restore heap property
+        if (index < this.heap.length) {
+            // Check whether to bubble down or up
+            this.bubbleDown(index);
+            this.bubbleUp(index);
+        }
+    }
+
 }
 
 // Example Usage
@@ -84,3 +108,5 @@ maxHeap.insert(8);
 console.log("Max Heap:", maxHeap.heap); // Output: [20, 17, 10, 15, 8]
 console.log("Extract Max:", maxHeap.extractMax()); // Output: 20
 console.log("After Extract:", maxHeap.heap); // Output: [17, 15, 10, 8]
+maxHeap.deleteNode(15)
+console.log("After Deletion:", maxHeap.heap);

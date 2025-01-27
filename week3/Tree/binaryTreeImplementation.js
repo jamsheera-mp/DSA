@@ -85,6 +85,88 @@ class Node {
         console.log("Invalid traversal order.");
       }
     }
+    // Find the deepest and rightmost node
+  findDeepestNode() {
+    const queue = [this.root];
+    let current;
+    while (queue.length) {
+      current = queue.shift();
+      if (current.left) queue.push(current.left);
+      if (current.right) queue.push(current.right);
+    }
+    return current; // Deepest node
+  }
+
+  // Delete the deepest node
+  deleteDeepestNode(deepestNode) {
+    const queue = [this.root];
+    while (queue.length) {
+      const current = queue.shift();
+
+      if (current.left) {
+        if (current.left === deepestNode) {
+          current.left = null;
+          return;
+        } else {
+          queue.push(current.left);
+        }
+      }
+
+      if (current.right) {
+        if (current.right === deepestNode) {
+          current.right = null;
+          return;
+        } else {
+          queue.push(current.right);
+        }
+      }
+    }
+  }
+
+  // Delete a node with a specific value
+  delete(value) {
+    if (!this.root) {
+      console.log("Tree is empty.");
+      return;
+    }
+
+    const queue = [this.root];
+    let nodeToDelete = null;
+
+    // Find the node to delete and keep traversing
+    while (queue.length) {
+      const current = queue.shift();
+
+      if (current.value === value) {
+        nodeToDelete = current;
+      }
+
+      if (current.left) queue.push(current.left);
+      if (current.right) queue.push(current.right);
+    }
+
+    if (!nodeToDelete) {
+      console.log("Node not found.");
+      return;
+    }
+
+    // Find the deepest node
+    const deepestNode = this.findDeepestNode();
+
+    // Replace the value of the node to delete with the deepest node
+    nodeToDelete.value = deepestNode.value;
+
+    // Delete the deepest node
+    this.deleteDeepestNode(deepestNode);
+  }
+
+  
+
+  // Print the tree
+  /* print() {
+    console.log("In-order traversal:");
+    this.inOrderTraversal(this.root);
+  } */
   }
   
   // Example usage:
@@ -101,3 +183,14 @@ class Node {
   tree.print("pre-order");  // Outputs: 10, 20, 40, 50, 30, 60
   tree.print("post-order"); // Outputs: 40, 50, 20, 60, 30, 10
   
+
+// Example usage:
+
+
+console.log("Before Deletion:");
+tree.print();
+
+tree.delete(20);
+
+console.log("After Deletion:");
+tree.print();
