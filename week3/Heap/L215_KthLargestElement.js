@@ -71,7 +71,7 @@ var findKthLargestUsingMinHeap = function(nums, k) {
             if (leftIdx < minHeap.length && minHeap[leftIdx] < minHeap[smallest]) {
                 smallest = leftIdx;
             }
-            if (rightIdx < minHeap.length && minHeap[rightIdx3] < minHeap[smallest]) {
+            if (rightIdx < minHeap.length && minHeap[rightIdx] < minHeap[smallest]) {
                 smallest = rightIdx;
             }
             if (smallest === idx) break;

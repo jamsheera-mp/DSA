@@ -9,6 +9,7 @@ class TrieNode {
 
 
 class Trie {
+    
     constructor() {
         this.root = new TrieNode(); // Initialize the root node
     }
@@ -49,6 +50,10 @@ class Trie {
         }
         return true; // Prefix exists
     }
+    
+
+    
+
 
     // Display all words in the Trie
     displayWords(node = this.root, prefix = "", words = []) {
@@ -66,6 +71,12 @@ class Trie {
 
 const trie = new Trie();
 
+
+trie.insert("flower");
+trie.insert("flow");
+trie.insert("flight");
+
+console.log(trie.findLongestPrefix()); // Output: "fl"
 // Insert words into the Trie
 trie.insert("cat");
 trie.insert("can");
@@ -83,3 +94,16 @@ console.log(trie.startsWith("bar")); // false
 
 // Display all words
 console.log(trie.displayWords()); // ['cat', 'can', 'bat', 'batman']
+// Insert words into the Trie
+
+trie.insert("cart");
+trie.insert("care");
+trie.insert("dog");
+trie.insert("dove");
+
+// Get auto-suggestions for a prefix
+console.log(trie.autoSuggest("ca")); // Output: ["cat", "car", "cart", "care"]
+console.log(trie.autoSuggest("do")); // Output: ["dog", "dove"]
+console.log(trie.autoSuggest("x"));  // Output: []
+
+console.log(trie.findLongestPrefix());
