@@ -8,6 +8,7 @@ class TrieNode {
 }
 
 
+
 class Trie {
     constructor() {
         this.root = new TrieNode(); // Initialize the root node
@@ -29,7 +30,6 @@ class Trie {
     
 
     
-
     // Search for all words with the given prefix
     autoSuggest(prefix) {
         let current = this.root;

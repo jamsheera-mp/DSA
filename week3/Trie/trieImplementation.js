@@ -67,6 +67,31 @@ class Trie {
 
         return words;
     }
+
+    // Delete a word from the Trie
+    delete(word) {
+        this.deleteNode(this.root, word, 0);
+    }
+
+    deleteNode(node, word, index) {
+        if (index === word.length) {
+            if (!node.isEndOfWord) return false; // Word not found
+            node.isEndOfWord = false;
+            return Object.keys(node.children).length === 0; // If no children, delete the node
+        }
+
+        const char = word[index];
+        if (!node.children[char]) return false; // Word not found
+
+        const shouldDeleteChild = this.deleteNode(node.children[char], word, index + 1);
+
+        if (shouldDeleteChild) {
+            delete node.children[char]; // Remove reference to child node
+            return Object.keys(node.children).length === 0 && !node.isEndOfWord;
+        }
+
+        return false;
+    }
 }
 
 const trie = new Trie();
@@ -76,7 +101,7 @@ trie.insert("flower");
 trie.insert("flow");
 trie.insert("flight");
 
-console.log(trie.findLongestPrefix()); // Output: "fl"
+/* console.log(trie.findLongestPrefix()); // Output: "fl" */
 // Insert words into the Trie
 trie.insert("cat");
 trie.insert("can");
@@ -90,6 +115,9 @@ console.log(trie.search("car")); // false
 // Check prefixes
 console.log(trie.startsWith("ca")); // true
 console.log(trie.startsWith("bat")); // true
+
+
+trie.delete("bat")
 console.log(trie.startsWith("bar")); // false
 
 // Display all words
@@ -101,9 +129,3 @@ trie.insert("care");
 trie.insert("dog");
 trie.insert("dove");
 
-// Get auto-suggestions for a prefix
-console.log(trie.autoSuggest("ca")); // Output: ["cat", "car", "cart", "care"]
-console.log(trie.autoSuggest("do")); // Output: ["dog", "dove"]
-console.log(trie.autoSuggest("x"));  // Output: []
-
-console.log(trie.findLongestPrefix());
